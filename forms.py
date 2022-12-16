@@ -5,6 +5,7 @@ from wtforms import (
     IntegerField,
     DateField,
     TextAreaField,
+    SelectField
 )
 
 from flask_wtf import FlaskForm
@@ -15,6 +16,8 @@ from wtforms import ValidationError,validators
 from models import User
 
 
+
+
 class login_form(FlaskForm):
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
     pwd = PasswordField(validators=[InputRequired(), Length(min=8, max=72)])
@@ -22,6 +25,16 @@ class login_form(FlaskForm):
     username = StringField(
         validators=[Optional()]
     )
+
+class profile_form(FlaskForm):
+    email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
+    address = StringField(validators=[InputRequired(), Length(1, 64)])
+    address2 = StringField(validators=[InputRequired(), Length(1, 64)])
+    city = StringField(validators=[InputRequired(), Length(1, 64)])
+    state = StringField(validators=[InputRequired(), Length(1, 64)])
+    zip = StringField(validators=[InputRequired(), Length(1, 64)])
+    
+
 
 
 class register_form(FlaskForm):
@@ -45,6 +58,14 @@ class register_form(FlaskForm):
             EqualTo("pwd", message="Passwords must match !"),
         ]
     )
+
+class vote_form(FlaskForm):
+    voted = SelectField('Select a norminee')
+
+
+
+
+
 
 
     def validate_email(self, email):
