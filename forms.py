@@ -27,6 +27,8 @@ class login_form(FlaskForm):
     )
 
 class profile_form(FlaskForm):
+    firstname = StringField(validators=[InputRequired(), Length(1, 64)])
+    lastname = StringField(validators=[InputRequired(), Length(1, 64)])
     email = StringField(validators=[InputRequired(), Email(), Length(1, 64)])
     address = StringField(validators=[InputRequired(), Length(1, 64)])
     address2 = StringField(validators=[InputRequired(), Length(1, 64)])
@@ -58,6 +60,7 @@ class register_form(FlaskForm):
             EqualTo("pwd", message="Passwords must match !"),
         ]
     )
+    token = StringField(validators=[InputRequired(), Length(1, 20)])
 
 class vote_form(FlaskForm):
     voted = SelectField('Select a norminee')

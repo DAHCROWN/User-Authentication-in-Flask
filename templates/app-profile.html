@@ -1382,29 +1382,26 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label">Address</label>
-                                                                <input type="text" placeholder="1234 Main St" class="form-control">
+                                                                {{form.address(class_="form-control",placeholder=userdata["address"])}}
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label">Address 2</label>
-                                                                <input type="text" placeholder="Apartment, studio, or floor" class="form-control">
+                                                                {{form.address2(class_="form-control",placeholder=userdata["address2"])}}
                                                             </div>
                                                             <div class="row">
                                                                 <div class="mb-3 col-md-6">
                                                                     <label class="form-label">City</label>
-                                                                    <input type="text" class="form-control">
+                                                                    {{form.city(class_="form-control",placeholder=userdata["city"])}}
                                                                 </div>
                                                                 <div class="mb-3 col-md-4">
                                                                     <label class="form-label">State</label>
-                                                                    <select class="form-control default-select wide" id="inputState">
-                                                                        <option selected="">Choose...</option>
-                                                                        <option>Option 1</option>
-                                                                        <option>Option 2</option>
-                                                                        <option>Option 3</option>
-                                                                    </select>
+																	{{form.state(class_="form-control",placeholder=userdata["state"])}}
+
+                                                            
                                                                 </div>
                                                                 <div class="mb-3 col-md-2">
-                                                                    <label class="form-label">Zip</label>
-                                                                    <input type="text" class="form-control">
+																	<label class="form-label">Zip</label>
+																	{{form.zip(class_="form-control",placeholder=userdata["zip"])}}
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
@@ -1448,6 +1445,7 @@
                 </div>
             </div>
         </div>
+		<h2>{{logs}}</h2>
         <!--**********************************
             Content body end
         ***********************************-->

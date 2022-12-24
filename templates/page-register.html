@@ -88,6 +88,18 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div> 
                                         {% endfor%}
+
+                                        <div class="form-group">
+                                            {{ form.token(class_="form-control",placeholder="Token")}}
+                                        </div>
+                                        {% for error in form.email.errors %}
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            {{ error }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        {% endfor%}
+
+
                                         <div class="text-center mt-4">
                                             <button type="submit" class="btn btn-primary btn-block">Sign me up</button>
                                         </div>

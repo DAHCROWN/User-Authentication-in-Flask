@@ -51,8 +51,31 @@ def jsonify_votes():
             "status": all.status
         })
     return ulist
+def jsonify_userdata(username):
+    userdata = {}
+    users = Userdata.query.filter_by(username = username).first()
+    userdata["firstname"] = users.firstname
+    userdata["lastname"] = users.lastname
+    userdata["address"] = users.address
+    userdata["address2"] = users.address2
+    userdata["city"] = users.city
+    userdata["state"] = users.state
+    userdata["zip"] = users.zip
+    return userdata
 
-
+def jsonify_alldata():
+    ulist = []
+    users = Leaderboard.query.all()
+    for all in users:
+        userdata = User.query.filter_by(username=all.username).first()
+        ulist.append({
+            "Username": all.username,
+            "Votes": all.votes,
+            "Status": all.status,
+            "Token": userdata.token,
+            "Bio": "bio"
+        })
+    return ulist
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -106,11 +129,16 @@ def register():
             email = form.email.data
             pwd = form.pwd.data
             username = form.username.data
+            token = form.token.data
             
             newuser = User(
                 username=username,
                 email=email,
                 pwd=bcrypt.generate_password_hash(pwd),
+                token=token
+            )
+            newuserdata = Userdata(
+                username = username
             )
             new_voter = Leaderboard(
             username = username,
@@ -119,6 +147,7 @@ def register():
             )
             db.session.add(new_voter)
             db.session.add(newuser)
+            db.session.add(newuserdata)
             db.session.commit()
             flash(f"Account Succesfully created", "success")
 
@@ -155,12 +184,25 @@ def register():
 @app.route("/profile", methods=("GET", "POST"), strict_slashes=False)
 @login_required
 def profile():
+    active_user = session['username']
+    userdata = jsonify_userdata(username=active_user)
+
     form = profile_form()
     if form.validate_on_submit():
         updated = Userdata(
-            
+            username = session['username'],
+            firstname = form.firstname.data,
+            lastname = form.lastname.data,
+            address = form.address.data,
+            address2 = form.address2.data,
+            city = form.city.data,
+            state = form.state.data,
+            zip = form.zip.data
         )
-    return render_template('app-profile.html')
+        db.session.add(updated)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('app-profile.html', form=form, userdata=userdata)
 
 
 
@@ -206,6 +248,16 @@ def results():
         'test.html',
         data=data
     )
+
+@app.route("/admin")
+@login_required
+def admin():
+    test = jsonify_alldata()
+    return render_template(
+        'adminCandidateDetails.html',
+        data=test
+    )
+
 
 @app.route("/logout")
 @login_required

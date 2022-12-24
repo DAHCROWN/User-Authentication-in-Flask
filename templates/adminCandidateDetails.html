@@ -96,7 +96,18 @@
                                   <th scope="col">Votes</th>
                                 </thead>
                                 <tbody id="contestantsResultsAdmin">
-                      
+                                  {%for item in data%}
+
+                                  <tr>
+                                    <td>{{data.index(item)}}</td>
+                                    <td>{{item["Username"]}}</td>
+                                    <td>{{item["Bio"]}}</td>
+                                    <td></td>
+                                    <td>{{item["Token"]}}</td>
+                                    <td>{{item["Votes"]}}</td>
+                                    <td></td>
+                                  </tr>
+                                  {%endfor%}
                                 </tbody>
                                 <hr/>
                                 <p id="accountAddress" class="text-center"></p>
@@ -118,8 +129,6 @@
     
     
     <!-- additional -->
-    
-
       
 
 
