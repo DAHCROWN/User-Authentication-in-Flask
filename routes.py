@@ -151,9 +151,6 @@ def register():
             db.session.commit()
             flash(f"Account Succesfully created", "success")
 
-
-
-
             return redirect(url_for("login"))
 
         except InvalidRequestError:
