@@ -28,7 +28,7 @@ def create_app():
     app.secret_key = 'secret-key'
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://twuwemqxcfnybs:94c9b1aee8a552f64dfd08aaf64dab7cba7e4e101e0f4396015cc4f5217ab797@ec2-3-229-161-70.compute-1.amazonaws.com:5432/d64n7ia1vjv5u8"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-    app.config[DISABLE_COLLECTSTATIC] = 1
+    app.config['DISABLE_COLLECTSTATIC'] = 1
 
     login_manager.init_app(app)
     db.init_app(app)
