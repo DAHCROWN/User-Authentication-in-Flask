@@ -268,7 +268,6 @@ def logout():
 
 
 
-
 @app.errorhandler(400)
 def page_not_found(error):
     return render_template('page-error-400.html'), 400
