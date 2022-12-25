@@ -158,7 +158,7 @@ def register():
             flash(f"Something went wrong!", "danger")
         except IntegrityError:
             db.session.rollback()
-            flash(f"User already exists!.", "warning")
+            flash(f"User credentials already used!.", "warning")
         except DataError:
             db.session.rollback()
             flash(f"Invalid Entry", "warning")
