@@ -10,7 +10,7 @@ def deploy():
 	db.create_all()
 
 	# migrate database to latest revision
-	# init()
+	init()
 	stamp()
 	migrate()
 	upgrade()
