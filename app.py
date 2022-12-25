@@ -10,7 +10,7 @@ from flask_login import (
     logout_user,
     login_required,
 )
-import os
+import pymysql
 
 
 
