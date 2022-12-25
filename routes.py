@@ -150,7 +150,6 @@ def register():
             db.session.add(newuserdata)
             db.session.commit()
             flash(f"Account Succesfully created", "success")
-
             return redirect(url_for("login"))
 
         except InvalidRequestError:
@@ -159,6 +158,7 @@ def register():
         except IntegrityError:
             db.session.rollback()
             flash(f"User credentials already exists!.", "warning")
+            # app.logger.warning(IntegrityErrord)
         except DataError:
             db.session.rollback()
             flash(f"Invalid Entry", "warning")
@@ -171,6 +171,7 @@ def register():
         except BuildError:
             db.session.rollback()
             flash(f"An error occured !", "danger")
+
     return render_template("page-register.html",
         form=form,
         text="Create account",
