@@ -134,7 +134,7 @@ def register():
             newuser = User(
                 username=username,
                 email=email,
-                pwd=bcrypt.generate_password_hash(pwd),
+                pwd=bcrypt.generate_password_hash(pwd).decode('utf-8'),
                 token=token
             )
             newuserdata = Userdata(
